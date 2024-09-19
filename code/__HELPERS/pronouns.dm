@@ -116,9 +116,7 @@
 	if(temp_gender != PLURAL && temp_gender != NEUTER)
 		. = "es"
 
-// LETHALSTONE NOTE: hello! we always return early on PLURAL check here because it's always correct (human mob overrides set it for disguises) and respects disguises. causes some code duplication though
 //mobs(and atoms but atoms don't really matter write your own proc overrides) also have gender!
-
 /mob/p_they(capitalized, temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
