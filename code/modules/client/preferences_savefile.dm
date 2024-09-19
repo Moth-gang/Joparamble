@@ -498,8 +498,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	backpack			= sanitize_inlist(backpack, GLOB.backpacklist, initial(backpack))
 	jumpsuit_style	= sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
 	uplink_spawn_loc = sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list, initial(uplink_spawn_loc))
+	/*
 	pronouns = sanitize_text(pronouns, THEY_THEM)
 	voice_type = sanitize_text(voice_type, VOICE_TYPE_MASC)
+	*/
 	features["mcolor"]	= sanitize_hexcolor(features["mcolor"], 6, 0)
 	features["mcolor2"]	= sanitize_hexcolor(features["mcolor2"], 6, 0)
 	features["mcolor3"]	= sanitize_hexcolor(features["mcolor3"], 6, 0)
@@ -600,9 +602,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	WRITE_FILE(S["update_mutant_colors"] , update_mutant_colors)
 	WRITE_FILE(S["headshot_link"] , headshot_link)
+	/*
 	WRITE_FILE(S["voice_type"] , voice_type)
 	WRITE_FILE(S["pronouns"] , pronouns)
-
+*/
 	WRITE_FILE(S["flavor_text"] , flavor_text)
 
 	WRITE_FILE(S["ooc_notes"] , ooc_notes)

@@ -1497,13 +1497,14 @@ Slots: [job.spawn_positions]</span>
 						// LETHALSTONE EDIT END
 						ResetJobs()
 						to_chat(user, "<font color='red'>Classes reset.</font>")
+						/*
 				// LETHALSTONE EDIT: add pronouns
 				if ("pronouns")
 					var pronouns_input = input(user, "Choose your character's pronouns", "Pronouns") as null|anything in GLOB.pronouns_list
 					if(pronouns_input)
 						pronouns = pronouns_input
 						to_chat(user, "<font color='red'>Your character's pronouns are now [pronouns].")
-
+*/
 				if("faith")
 					var/list/faiths_named = list()
 					for(var/path as anything in GLOB.preference_faiths)
@@ -2164,12 +2165,14 @@ Slots: [job.spawn_positions]</span>
 	character.dna.real_name = character.real_name
 
 	character.headshot_link = headshot_link
+	/*
 	// LETHALSTONE ADDITION BEGIN: additional customizations
 
 	character.pronouns = pronouns
 	character.voice_type = voice_type
 
 	// LETHALSTONE ADDITION END
+	*/
 
 	if(parent)
 		var/list/L = get_player_curses(parent.ckey)
