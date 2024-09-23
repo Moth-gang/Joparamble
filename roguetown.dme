@@ -3623,6 +3623,4 @@
 #include "modular_joparamble\code\modules\client\customizer\customizers\organ\genitals.dm"
 #include "modular_joparamble\code\_DEFINES\DNA.dm"
 #include "modular_joparamble\code\_DEFINES\preferences.dm"
-#include "modular_joparamble\code\_HELPERS\pronouns.dm"
-#include "modular_joparamble\code\datums\emotes.dm"
 // END_INCLUDE
