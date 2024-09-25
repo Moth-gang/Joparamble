@@ -31,8 +31,5 @@
 /obj/item/reagent_containers/glass/bottle/rogue/nullmagicpot
 	list_reagents = list(/datum/reagent/medicine/nullmagicpot = 20)
 
-/obj/item/reagent_containers/glass/bottle/rogue/trekkersdelight
-	list_reagents = list(/datum/reagent/medicine/trekkersdelight = 40)
-
 /obj/item/reagent_containers/glass/bottle/rogue/virilitypot
 	list_reagents = list(/datum/reagent/medicine/virilitypot = 40)
