@@ -374,7 +374,6 @@
 #include "code\controllers\subsystem\rogue\triumphs\triumph_buy_datums\misc\wipe_triumphs.dm"
 #include "code\controllers\subsystem\rogue\triumphs\triumph_buy_datums\round_effects\femlocks.dm"
 #include "code\controllers\subsystem\rogue\triumphs\triumph_buy_datums\round_effects\grenzelhoft.dm"
-#include "modular_joparamble\global_modpacks.dm"
 #include "code\datums\action.dm"
 #include "code\datums\ai_laws.dm"
 #include "code\datums\armor.dm"
@@ -3632,4 +3631,5 @@
 #include "modular_joparamble\code\modules\client\customizer\customizers\organ\genitals.dm"
 #include "modular_joparamble\code\_DEFINES\DNA.dm"
 #include "modular_joparamble\code\_DEFINES\preferences.dm"
+#include "modular_joparamble\global_modpacks.dm"
 // END_INCLUDE
