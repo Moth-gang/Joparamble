@@ -11,10 +11,10 @@
 	name = "status"
 	help_text = "Показывает админов, кол-во игроков, игровой режим и настоящий игровой режим на сервере"
 	admin_only = TRUE
-	var/last_irc_status = 0
+	last_irc_status = 0
 
 /datum/tgs_chat_command/ircstatus/Run(datum/tgs_chat_user/sender, params)
-	var/rtod = Uptime()
+	var/rtod = REALTIMEOFDAY
 	if(rtod - last_irc_status < IRC_STATUS_THROTTLE)
 		return
 	last_irc_status = rtod
@@ -31,7 +31,6 @@
 	var/datum/tgs_chat_embed/field/useless		= new ("Сотрудники без флага +BAN", "[english_list(adm["noflags"])]")
 	var/datum/tgs_chat_embed/field/players		= new ("Игроки", "[GLOB.clients.len]")
 	var/datum/tgs_chat_embed/field/activePlayers= new ("Активные игроки", "[get_active_player_count(0,1,0)]")
-	var/datum/tgs_chat_embed/field/modePublic	= new ("Публичный режим", "||[PUBLIC_GAME_MODE]||")
 	var/datum/tgs_chat_embed/field/modeReal		= new ("Реальный режим", "||[SSticker.mode ? SSticker.mode.name : "Не начался"]||")
 	adminCount.is_inline = TRUE
 	afk.is_inline = TRUE
@@ -40,11 +39,11 @@
 	activePlayers.is_inline = TRUE
 	//modePublic.is_inline = TRUE
 	modeReal.is_inline = TRUE
-	embed.fields = list(adminCount, activeAdmins, afk, stealth, useless, players, activePlayers, modePublic, modeReal)
+	embed.fields = list(adminCount, activeAdmins, afk, stealth, useless, players, activePlayers, modeReal)
 	embed.colour = "#00ff8c"
 
 	embed.title = "Статус Гунпещер"
-	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'PRX'")
+	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Гунпещеры")
 	//embed.footer = new /datum/tgs_chat_embed/footer("Сервер 'PRX'")
 	//embed.url = NON_BYOND_URL
 
@@ -53,40 +52,40 @@
 /datum/tgs_chat_command/irccheck
 	name = "check"
 	help_text = "Показывает онлайн, текущий режим и адрес сервера"
-	var/last_irc_check = 0
+	last_irc_check = 0
 
 /datum/tgs_chat_command/irccheck/Run(datum/tgs_chat_user/sender, params)
-	var/rtod = Uptime()
+	var/rtod = REALTIMEOFDAY
 	if(rtod - last_irc_check < IRC_STATUS_THROTTLE)
 		return
 	last_irc_check = rtod
+	var/server = CONFIG_GET(string/server)
 
 	var/datum/tgs_message_content/message = new ("")
 	var/datum/tgs_chat_embed/structure/embed = new()
 	message.embed = embed
-	var/datum/tgs_chat_embed/field/round		= new ("Раунд №", "[game_id ? "[game_id]" : "НЕТ АЙДИ"]")
+	var/datum/tgs_chat_embed/field/round		= new ("Раунд №", "[GLOB.round_id ? "[GLOB.round_id]" : "НЕТ АЙДИ"]")
 	var/datum/tgs_chat_embed/field/players		= new ("Игроки", "[GLOB.clients.len]")
-	var/datum/tgs_chat_embed/field/map			= new ("Карта", "[GLOB.using_map.full_name]")
-	var/datum/tgs_chat_embed/field/modePublic	= new ("Режим", "||[PUBLIC_GAME_MODE]||")
-	var/datum/tgs_chat_embed/field/gameStatus	= new ("Статус игры", "[GAME_STATE != RUNLEVEL_LOBBY ? (GAME_STATE != RUNLEVEL_POSTGAME ? "Активен" : "Заканчивается") : "Подготавливается"]")
+	var/datum/tgs_chat_embed/field/map			= new ("Карта", "[SSmapping.config.map_name]")
+	var/datum/tgs_chat_embed/field/gameStatus	= new ("Статус игры", "[SSticker.HasRoundStarted() ? (SSticker.IsRoundInProgress() ? "Active" : "Finishing") : "Starting"] -- [server ? server : "[world.internet_address]:[world.port]"]")
 
 	round.is_inline = TRUE
 	players.is_inline = TRUE
 	//map.is_inline = TRUE
-	modePublic.is_inline = TRUE
 	gameStatus.is_inline = TRUE
-	embed.fields = list(round, players, map, modePublic, gameStatus)
+	embed.fields = list(round, players, map, gameStatus)
 	embed.colour = "#ffae00"
 
 
-	embed.title = "Статус гунпещер"
-	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'Goonworld'")
+	embed.title = "Статус сервера Proxima"
+	embed.author = new /datum/tgs_chat_embed/provider/author/glob("Сервер 'PRX'")
 	//embed.footer = new /datum/tgs_chat_embed/footer("Сервер 'PRX'")
 	//embed.url = NON_BYOND_URL
 
 	return message
 
 /*
+
 /datum/tgs_chat_command/ircmanifest
 	name = "manifest"
 	help_text = "Показывает список членов экипажа с их должностями"
@@ -145,7 +144,6 @@
 
 			msg = list()
 	return message
-*/
 
 /datum/tgs_chat_command/adminwho
 	name = "adminwho"
@@ -201,6 +199,7 @@
 	embed.fields = list(adminCount, adminList)
 
 	return message
+*/
 
 GLOBAL_LIST(round_end_notifiees)
 
@@ -210,8 +209,8 @@ GLOBAL_LIST(round_end_notifiees)
 	//admin_only = TRUE
 
 /datum/tgs_chat_command/notify/Run(datum/tgs_chat_user/sender, params)
-	if(GAME_STATE == RUNLEVEL_POSTGAME)
-		return new /datum/tgs_message_content("[sender.mention], раунд уже закончился!")
+	if(!SSticker.IsRoundInProgress() && SSticker.HasRoundStarted())
+		return "[sender.mention], раунд уже закончился!"
 	LAZYINITLIST(GLOB.round_end_notifiees)
 	GLOB.round_end_notifiees[sender.mention] = TRUE
-	return new /datum/tgs_message_content("Я уведомлю [sender.mention] когда раунд закончится.")
+	return "Я уведомлю [sender.mention] когда раунд закончится."
