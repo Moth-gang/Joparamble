@@ -4,5 +4,5 @@
 #include "modules\client\customizer\customizers\organ\genitals.dm"
 #include "_DEFINES\DNA.dm"
 #include "_DEFINES\preferences.dm"
-#include "modules\TGSintegraion\tgs_include.dm"
+#include "modules\TGSintegration\tgs_include.dm"
 #endif

@@ -73,7 +73,7 @@
 /datum/tgs_chat_command/adminwho/Run(datum/tgs_chat_user/sender, params)
 	return ircadminwho()
 
-GLOBAL_LIST(round_end_notifiees)
+//GLOBAL_LIST(round_end_notifiees)
 
 /datum/tgs_chat_command/endnotify
 	name = "endnotify"
