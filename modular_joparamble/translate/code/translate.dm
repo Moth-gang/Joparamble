@@ -1,5 +1,4 @@
-// [RU_HEARTSTONE-EDIT]
-/*GLOBAL_LIST_EMPTY(outlawed_players)
+GLOBAL_LIST_EMPTY(outlawed_players)
 GLOBAL_LIST_EMPTY(lord_decrees)
 GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 
@@ -278,7 +277,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 	if(raw_message in GLOB.outlawed_players)
 		GLOB.outlawed_players -= raw_message
 		if(!silent)
-			priority_announce("[raw_message] он больше не находится вне закона в землях Рокхилла.", "Король издал указ", 'sound/misc/royal_decree.ogg', "Captain")
+			priority_announce("[raw_message] больше не находится вне закона в землях Рокхилла.", "Король издал указ", 'sound/misc/royal_decree.ogg', "Captain")
 		return FALSE
 	var/found = FALSE
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
@@ -305,4 +304,3 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 /proc/purge_laws()
 	GLOB.laws_of_the_land = list()
 	priority_announce("Все законы страны были отменены!", "ЗАКОНЫ БЫЛИ ОЧИЩЕНЫ", 'sound/misc/lawspurged.ogg', "Captain")
-[HEARTSTONE-EDIT-END]*/
