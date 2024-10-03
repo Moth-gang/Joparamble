@@ -12,8 +12,8 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 	return laws[chosen_lawset]["laws"]
 
 /obj/structure/roguemachine/titan
-	name = "throat"
-	desc = "He who wears the crown holds the key to this strange thing. If all else fails, yell \"Help!\""
+	name = "Трон"
+	desc = "Тот, кто носит корону, владеет ключом к этой странной штуке. Если все остальное не поможет, кричите \"Помощь!\""
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = ""
 	density = FALSE
@@ -28,7 +28,6 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 /obj/structure/roguemachine/titan/obj_break(damage_flag)
 	..()
 	cut_overlays()
-//	icon_state = "[icon_state]-br"
 	set_light(0)
 	return
 
@@ -39,14 +38,9 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 /obj/structure/roguemachine/titan/Initialize()
 	. = ..()
 	icon_state = null
-//	var/mutable_appearance/eye_lights = mutable_appearance(icon, "titan-eyes")
-//	eye_lights.plane = ABOVE_LIGHTING_PLANE //glowy eyes
-//	eye_lights.layer = ABOVE_LIGHTING_LAYER
-//	add_overlay(eye_lights)
 	set_light(5)
 
 /obj/structure/roguemachine/titan/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode, original_message)
-//	. = ..()
 	if(speaker == src)
 		return
 	if(speaker.loc != loc)
@@ -220,7 +214,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 			return
 		newtax = CLAMP(newtax, 1, 99)
 		SStreasury.tax_value = newtax / 100
-		priority_announce("Новый налог в Рокхилле будет составлять [newtax] процент.", "Великодушный Господь Постановляет", pick('sound/misc/royal_decree.ogg', 'sound/misc/royal_decree2.ogg'), "Captain")
+		priority_announce("Новый налог в Рокхилле будет составлять [newtax] процент.", "Милорд Постановляет", pick('sound/misc/royal_decree.ogg', 'sound/misc/royal_decree2.ogg'), "Captain")
 
 
 /obj/structure/roguemachine/titan/proc/make_announcement(mob/living/user, raw_message)
