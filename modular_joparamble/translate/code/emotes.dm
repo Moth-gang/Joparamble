@@ -477,6 +477,7 @@
 
 	emote("grimace", intentional = TRUE)
 */
+
 /datum/emote/living/jump
 	key = "jump"
 	key_third_person = "прыгает"
@@ -1400,8 +1401,8 @@
 
 /mob/living/carbon/human/verb/emote_shake()
 	set name = "Встряхнуться"
-	set category = "Emotes"
-
+	emote_type = EMOTE_VISIBLE
+  
 	emote("shake", intentional = TRUE)
 
 /datum/emote/living/squint
@@ -1622,7 +1623,6 @@
 		var/mob/living/carbon/C = user
 		if(C.silent || !C.can_speak())
 			message = "издаёт сдавленный звук, сопровождающийся слёзами."
-
 
 /datum/emote/living/carbon/human/sexmoanlight
 	key = "sexmoanlight"
